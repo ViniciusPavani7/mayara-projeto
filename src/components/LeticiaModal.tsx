@@ -9,6 +9,7 @@ type LeticiaModalProps = {
 
 export function LeticiaModal({ card, onClose }: LeticiaModalProps) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (!card) return
@@ -24,6 +25,7 @@ export function LeticiaModal({ card, onClose }: LeticiaModalProps) {
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKeyDown)
+      videoRef.current?.pause()
     }
   }, [card, onClose])
 
@@ -62,11 +64,11 @@ export function LeticiaModal({ card, onClose }: LeticiaModalProps) {
             </button>
           </div>
 
-          <h2 id="leticia-modal-title" className="font-display text-2xl leading-tight text-ink">
+          <h2 id="leticia-modal-title" className="font-display text-3xl leading-tight text-ink">
             {card.title}
           </h2>
 
-          <div className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+          <div className="mt-4 space-y-3 text-base leading-relaxed text-muted-foreground">
             {paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -82,6 +84,17 @@ export function LeticiaModal({ card, onClose }: LeticiaModalProps) {
               />
             ))}
           </div>
+
+          {card.video && (
+            <video
+              ref={videoRef}
+              src={card.video}
+              controls
+              playsInline
+              preload="metadata"
+              className="mt-4 w-full rounded-2xl"
+            />
+          )}
         </div>
       </div>
     </div>
