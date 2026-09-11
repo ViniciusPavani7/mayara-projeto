@@ -1,11 +1,13 @@
-import { LetterCard } from '../components/LetterCard'
-import { PaintSplash } from '../components/PaintSplash'
+import { EnvelopeCard } from '../components/EnvelopeCard'
 
-export function LandingPage() {
+type LandingPageProps = {
+  onOpen: () => void
+}
+
+export function LandingPage({ onOpen }: LandingPageProps) {
   return (
     <main className="world-bg flex min-h-screen items-center justify-center p-4">
-      <PaintSplash />
-      <LetterCard />
+      <EnvelopeCard onOpen={onOpen} />
     </main>
   )
 }

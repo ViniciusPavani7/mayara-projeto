@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant landscape (@media (orientation: landscape));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -74,14 +75,7 @@
   --cream-paint: oklch(0.92 0.06 95);
   --ink: oklch(0.3 0.05 30);
 
-  --gradient-world: radial-gradient(
-      circle at 15% 20%,
-      color-mix(in oklab, var(--rose-paint) 55%, transparent),
-      transparent 45%
-    ),
-    radial-gradient(circle at 85% 12%, color-mix(in oklab, var(--sun-paint) 55%, transparent), transparent 42%),
-    radial-gradient(circle at 78% 78%, color-mix(in oklab, var(--mint-paint) 50%, transparent), transparent 45%),
-    radial-gradient(circle at 20% 85%, color-mix(in oklab, var(--grape-paint) 45%, transparent), transparent 45%);
+  --gradient-world: linear-gradient(to bottom, #ff9e62, #b12114);
   --shadow-paper: 0 18px 40px -18px color-mix(in oklab, var(--ink) 45%, transparent);
   --shadow-lift: 0 30px 60px -22px color-mix(in oklab, var(--ink) 55%, transparent);
 }
@@ -134,7 +128,7 @@
 }
 
 @utility world-bg {
-  background-color: var(--background);
+  background-color: #8a2219;
   background-image: var(--gradient-world);
 }
 
@@ -219,6 +213,38 @@
 
 @utility animate-splat {
   animation: splat 0.7s ease-out forwards;
+}
+
+@keyframes envelope-tap {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  35% {
+    transform: rotate(3deg) scale(1.02);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@utility animate-envelope-tap {
+  animation: envelope-tap 0.5s ease-in-out both;
+  transform-origin: center center;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-in {
+  animation: fade-in 0.5s ease-out both;
 }
 
 @utility animate-drift-up {
